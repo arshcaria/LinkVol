@@ -32,5 +32,6 @@ public class LinkVolService extends Service {
 		SettingsContentObserver mSettingsContentObserver = new SettingsContentObserver(this, new Handler());
 		getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mSettingsContentObserver );
 	}
+	
 
 }

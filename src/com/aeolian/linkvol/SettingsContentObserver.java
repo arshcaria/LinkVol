@@ -8,15 +8,16 @@ import android.util.Log;
 
 public class SettingsContentObserver extends ContentObserver {
 	private static final String TAG = "SettingsContentObserver";
-	private int previousVolume;
-	private int currentVolume;
+	private int preVol;
+	private int curVol;
+	private AudioManager am;
 	private Context mContext;
 
 	public SettingsContentObserver(Context c, Handler handler) {
 		super(handler);
 		mContext = c;
-		AudioManager audio = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-		previousVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
+		am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+		preVol = am.getStreamVolume(AudioManager.STREAM_MUSIC);
 	}
 
 	@Override
@@ -28,13 +29,13 @@ public class SettingsContentObserver extends ContentObserver {
 	public void onChange(boolean selfChange) {
 		super.onChange(selfChange);
 
-		AudioManager audio = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-		currentVolume = audio.getStreamVolume(AudioManager.STREAM_RING);
-		int delta = previousVolume - currentVolume;
+		am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+		curVol = am.getStreamVolume(AudioManager.STREAM_RING);
+		int delta = curVol - preVol;
 		if (delta != 0) {
-			Log.d(TAG, "Ringtone volume changed to " + currentVolume);
-			previousVolume = currentVolume;
-			audio.setStreamVolume(AudioManager.STREAM_NOTIFICATION, currentVolume, 0);
+			Log.d(TAG, "Ringtone volume changed to " + curVol);
+			preVol = curVol;
+			am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, curVol, 0);
 		}
 
 	}
