@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LinkedVol</string>
+    <string name="app_name">LinkVol</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="whether_link">是否连接铃声和通知的音量?</string>
+    <string name="whether_link">连接铃声和通知的音量</string>
 
 </resources>

@@ -25,21 +25,18 @@ public class MainActivity extends Activity {
 	}
 
 	public void onCheckboxClicked(View view) {
-		// Is the view now checked?
+		Intent intent = new Intent();
+		intent.setClass(getApplicationContext(), LinkVolService.class);
+		
 		boolean checked = ((CheckBox) view).isChecked();
-
-		// Check which checkbox was clicked
 		switch (view.getId()) {
 		case R.id.chk_start:
 			if (checked) {
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(), LinkVolService.class);
 				startService(intent);
 			} else {
-
+				stopService(intent);
 			}
 			break;
 		}
 	}
-
 }

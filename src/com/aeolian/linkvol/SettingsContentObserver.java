@@ -30,9 +30,7 @@ public class SettingsContentObserver extends ContentObserver {
 
 		AudioManager audio = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 		currentVolume = audio.getStreamVolume(AudioManager.STREAM_RING);
-
 		int delta = previousVolume - currentVolume;
-
 		if (delta != 0) {
 			Log.d(TAG, "Ringtone volume changed to " + currentVolume);
 			previousVolume = currentVolume;
